@@ -1,0 +1,43 @@
+server:
+  context-path: /api
+
+spring: 
+  jpa:
+    database: mysql
+    hibernate:
+      naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+    properties:
+      hibernate.format_sql: true
+    
+google.secret.id: ENC(tl1Qjrw2fM/fZLg6I6JJhtQBiK2j4YJ2LMVLshrrZVGyN5Pv/OJ5ZdxDkwFmdWLS)
+
+slack:
+  notification:
+    url: ENC(8HApecKcGTvROuTEi7vdhyd5MtX0C+BEu6W2Qe+wLX+H2gekRwUjIWCAMnEEYTgmkVZoHLcaInnlj37n6vmcq/7ZTEqnPkoApBoPV9gfl9G2xoT0p3VQlw==)
+
+---
+spring:
+  profiles: local
+
+  jpa:
+    show-sql: true
+
+  datasource: 
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/bass_story
+    username: ENC(p2Yv6GHtSdjqcf4SFPLXTQ==)
+    password: ENC(Ccxp4VNx99/eKE1wNVB5cUQeitOufLTI)
+    
+---
+spring:
+  profiles: prd
+
+  datasource: 
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/bass_story
+    username: ENC(xxRqqH+X5fclqsO73bAYvg==)
+    password: ENC(YH5JvjVDpi+wc9QhIbArR2STSP+9qEcr)
+    
+    
