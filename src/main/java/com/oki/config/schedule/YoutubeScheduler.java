@@ -140,6 +140,7 @@ public class YoutubeScheduler {
 					logger.info("New youtube playlist item is added. item={}", youtube);
 				}
 			}
+			logger.info("Youtube crawling is done, date={}", today);
 		} catch (Exception e) {
 			logger.error("YoutubeScheduler youtube processing is failed. playlistId={}, error={}", youtubePlaylistid, BassLogManager.makeLog(e.getMessage(), e));
 		}
