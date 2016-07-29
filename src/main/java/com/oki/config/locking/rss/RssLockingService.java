@@ -28,27 +28,6 @@ public class RssLockingService implements FilteredLockingManager {
     private Map<String, String> registeredContent = new ConcurrentHashMap<>();
     private Map<String, String> filters = new ConcurrentHashMap<>();
 	
-//    static {
-//    	filters.add("물속세상"); // 주물럭
-//    	filters.add("낚시(2016)"); // dolong17
-//    	filters.add("낚시여행"); // 미르
-//    	filters.add("추천루어와 장비관리"); // 미르
-//    	filters.add("▶ 2016"); // 앨런
-//    	filters.add("▶ 루어"); // 앨런
-//    	filters.add("▶ 로드"); // 앨런
-//    	filters.add("▶ 릴"); // 앨런
-//    	filters.add("▶ 라인"); // 앨런
-//    	filters.add("▶ 채비"); // 앨런
-//        
-//    	filters.add("Lure Fishing"); // 깜쿵
-//        
-//    	filters.add("루어-민물"); // 슈크르
-//        
-//    	filters.add("FISHING STORY"); // 카우
-//
-//    	//category.add(""); // 
-//    }
-    
 	@Override
 	public boolean isEmpty() {
 		synchronized (this) {
@@ -98,9 +77,6 @@ public class RssLockingService implements FilteredLockingManager {
 			boolean isAllow = false;
 			try {
 				isAllow = filters.containsKey(KeyGenerator.makeKey(content));
-//				for (String key : filters.keySet()) {
-//					System.out.println(key + ":" + filters.get(key));
-//				}
 			} catch (Exception e) {
 				logger.error("error={}", BassLogManager.makeLog(e.getMessage(), e));
 			}
