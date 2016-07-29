@@ -104,7 +104,7 @@ public class IntegrationConfig {
 					if (filteredLockingManager.isRegistered(syndEntry.getTitle())) continue;
 					
 					String url = syndEntry.getLink();
-					String img = imageMetadataParser.get(url, MetadataParser.META_TYPE.IMAGE);
+					String img = imageMetadataParser.get(url, id, MetadataParser.META_TYPE.IMAGE);
 					
 					Blog blog = bassBlogRepository.findById(id);
 					if (blog == null) {
