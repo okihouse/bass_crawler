@@ -17,6 +17,7 @@ import com.oki.config.locking.FilteredLockingManager;
 import com.oki.config.locking.rss.RssLockingService;
 import com.oki.config.log.BassLogManager;
 import com.oki.config.property.PropertiesResource;
+import com.oki.config.vo.SuccessVO;
 import com.oki.error.constant.BassErrorConstant;
 import com.oki.error.exception.BassProcessException;
 import com.rometools.rome.feed.synd.SyndFeed;
@@ -36,12 +37,12 @@ public class BassBlogService {
 	private PropertiesResource propertiesResource;
 
 	@Transactional
-	public void insert(BassBlogInsertVO bassBlogInsertVO) throws BassProcessException {
+	public SuccessVO insert(BassBlogInsertVO bassBlogInsertVO) throws BassProcessException {
 		
 		List<Blog> blogs = bassBlogRepository.findByUrl(bassBlogInsertVO.getUrl());
 		if (blogs.isEmpty() == false) {
-			logger.info("Blog is existed. blog={}", blogs);
-			return;
+			logger.warn("Blog is existed. blog={}", blogs);
+			throw new BassProcessException(10450, "blog is already existed.");
 		}
 		
 		FilteredLockingManager filteredLockingManager = (FilteredLockingManager) RssLockingService.getInstance();
@@ -74,17 +75,8 @@ public class BassBlogService {
 		
 		bassBlogRepository.save(blog);
 		logger.info("New blog is added. item={}", blog);
+		return new SuccessVO();
 	}
-
-//	private String parseId(String url) {
-//		String id = "";
-//		if (url.contains("blog.rss.naver.com")) {
-//			id = url.replace("http://blog.rss.naver.com/", "").replace(".xml", "");
-//    	} else if (url.contains("blog.me")) {
-//    		id = url.replace("http://", "").replace(".blog.me/rss", "");
-//    	}
-//		return id;
-//	}
 
 	@Transactional
 	public void profile() {

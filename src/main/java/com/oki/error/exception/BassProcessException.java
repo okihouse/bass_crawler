@@ -19,6 +19,11 @@ public class BassProcessException extends BassException {
 		this.message = errorVO.getErrorMessage();
 	}
 	
+	public BassProcessException(int code, String message) {
+		this.code = code;
+		this.message = message;
+	}
+	
 	@Override
 	public int errorCode() {
 		return code;
