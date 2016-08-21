@@ -50,9 +50,9 @@ public class YoutubeScheduler {
 	public void youtube() {
 		
 		String youtubePlaylistid = null;
+		Date today = new Date();
 		try {
 			List<String> itemlist = getItemList();
-			Date today = new Date();
 			validateList(today);
 			
 //			Calendar calendar = Calendar.getInstance();
@@ -140,10 +140,10 @@ public class YoutubeScheduler {
 					logger.info("New youtube playlist item is added. item={}", youtube);
 				}
 			}
-			logger.info("Youtube crawling is done, date={}", today);
 		} catch (Exception e) {
 			logger.error("YoutubeScheduler youtube processing is failed. playlistId={}, error={}", youtubePlaylistid, BassLogManager.makeLog(e.getMessage(), e));
 		}
+		logger.info("Youtube crawling is done, date={}", today);
 	}
 	
 	private List<String> getItemList() {
